@@ -1,0 +1,30 @@
+CREATE TABLE Aluno 
+( 
+Nr_Rgm NUMBER(8), 
+Nm_Nome VARCHAR2(40), 
+Nm_Pai VARCHAR2(40), 
+Nm_Mae VARCHAR2(40), 
+Dt_Nascimento DATE, 
+Id_Sexo CHAR(1), 
+CONSTRAINT PK_Aluno PRIMARY KEY (Nr_Rgm) 
+);
+CREATE TABLE Classe 
+(  
+Cd_Classe NUMBER(8),  
+Nr_AnoLetivo NUMBER(4),  
+Nr_Serie NUMBER(2),  
+Sg_Turma VARCHAR2(2),  
+Cd_Escola NUMBER(6),  
+Cd_Grau NUMBER(2),  
+Cd_Periodo NUMBER(2),  
+CONSTRAINT PK_Classe PRIMARY KEY (Cd_Classe)  
+);
+CREATE TABLE Matricula
+(
+Nr_Rgm NUMBER(8),
+Cd_Classe NUMBER(8), 
+Dt_Matricula DATE,
+CONSTRAINT PK_Matricula PRIMARY KEY (Nr_Rgm, Cd_Classe), 
+CONSTRAINT FK_Matricula_REF_Aluno FOREIGN KEY (Nr_Rgm) REFERENCES Aluno (Nr_Rgm),
+CONSTRAINT FK_Matricula_REF_Classe FOREIGN KEY (Cd_Classe) REFERENCES Classe (Cd_Classe)
+);
